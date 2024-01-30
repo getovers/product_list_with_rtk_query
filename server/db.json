@@ -1,20 +1,16 @@
 {
-    "goods": [
-        {
-            "id": 1,
-            "name": "trousers"
-        },
-        {
-            "id": 2,
-            "name": "candy"
-        },
-        {
-            "id": 3,
-            "name": "glasses"
-        },
-        {
-            "id": 4,
-            "name": "milk"
-        }
-    ]
+  "goods": [
+    {
+      "id": "2",
+      "name": "candy"
+    },
+    {
+      "id": "1e77",
+      "name": "shoes"
+    },
+    {
+      "id": "b5fb",
+      "name": "gloves"
+    }
+  ]
 }
