@@ -14,20 +14,15 @@ export const goodsApi = createApi({
     endpoints: (build) => ({
         getGoods: build.query<Product[], string>({
             query: (limit = '') => ({url: 'goods', params: {_limit: limit}}),
-            providesTags: (result) => result
-              ? [
-                  ...result.map(({ id }) => ({ type: 'Products' as const, id })),
-                  { type: 'Products', id: 'LIST' },
-                ]
-              : [{ type: 'Products', id: 'LIST' }],
+            providesTags: ['Products']
         }),
         addProduct: build.mutation<Product, ProductPostBody>({
-            query: (body) => ({url: 'goods', method: 'POST' as const, body: body}),
-            invalidatesTags: [{type: 'Products', id: 'LIST'}]
+            query: (body) => ({url: 'goods', method: 'POST', body: body}),
+            invalidatesTags: ['Products']
         }),
         deleteProduct: build.mutation<string, string>({
             query: (id) => ({url: `goods/${id}`, method: 'DELETE'}),
-            invalidatesTags: [{type: 'Products' as const, id: 'LIST'}]
+            invalidatesTags: ['Products']
         })
     })
 })
