@@ -5,7 +5,7 @@ import { useGetGoodsQuery, useAddProductMutation, useDeleteProductMutation } fro
 function App() {
 const [count, setCount] = useState('')
 const [newProduct, setNewProduct] = useState('')
-const {data = [], error, isError, isLoading} = useGetGoodsQuery(count)
+const {data = [], error, isLoading} = useGetGoodsQuery(count)
 const [addProduct, {}] = useAddProductMutation()
 const [deleteProduct] = useDeleteProductMutation()
 
@@ -16,12 +16,26 @@ const handleAddProduct = async () => {
   }
 }
 
-const handleDeleteProduct = async (id) => {
+const handleDeleteProduct = async (id: string) => {
   await deleteProduct(id).unwrap()
 }
 
 if (isLoading) return <h1>Loading...</h1>
-if (isError) return <h1>{error.error}</h1>
+if (error) {
+  console.log(error)
+  if ('status' in error) {
+    const errMsg = 'error' in error ? error.error : JSON.stringify(error.data)
+    return (
+      <div>
+        <div >An error has occured:</div>
+        <div style={{color: 'red'}}>{errMsg}</div>
+      </div>
+    )
+  } else {
+    return <div style={{color: 'red'}}>{error.message}</div>
+  }
+}
+
 
   return (
     <div className="App">
